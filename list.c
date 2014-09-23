@@ -10,7 +10,7 @@
 struct listhdr *list_create() {
 	struct listhdr *list;
 
-	list = molloc(sizeof(struct listhdr));
+	list = malloc(sizeof(struct listhdr));
 	if (list == NULL) return NULL;
 
 	list->head = NULL;
@@ -24,7 +24,7 @@ struct listhdr *list_create() {
 struct listhdr *add_head_node(struct listhdr *list, void *value) {
 	struct node *node;
 
-	node = (struct node *)molloc(sizeof(struct node));
+	node = (struct node *)malloc(sizeof(struct node));
 	if (node == NULL) return NULL;
 
 	node->value = value;
@@ -49,7 +49,7 @@ struct listhdr *add_head_node(struct listhdr *list, void *value) {
 struct listhdr *add_tail_node(struct listhdr *list, void *value) {
 	struct node *node;
 
-	node = (struct node *)molloc(sizeof(struct node));
+	node = (struct node *)malloc(sizeof(struct node));
 	if (node == NULL) return NULL;
 
 	if (list->tail == NULL) {
@@ -72,7 +72,7 @@ struct listhdr *add_tail_node(struct listhdr *list, void *value) {
 struct listhdr *insert_node(struct listhdr *list, struct node *old_node, void *value, int after) {
 	struct node *node;
 
-	node = (struct node *)molloc(sizeof(struct node));
+	node = (struct node *)malloc(sizeof(struct node));
 	if (node == NULL) return NULL;
 
 	if (after) {
@@ -103,7 +103,7 @@ struct listhdr *insert_node(struct listhdr *list, struct node *old_node, void *v
 struct list_iter *list_iteration(struct listhdr *list, int direction) {
 	struct list_iter *iter;
 
-	iter = (struct list_iter *)molloc(sizeof(struct list_iter));
+	iter = (struct list_iter *)malloc(sizeof(struct list_iter));
 	if (iter == NULL) return NULL;
 
 	if (direction == LIST_START_HEAD)
