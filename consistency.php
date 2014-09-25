@@ -2,8 +2,9 @@
 
 /* Author：Tony yin
  * Date:2014-9-25
- * Description:参考一致性哈希方案实现的一致性哈希库
+ * Description:参考一致性哈希方案实现的一致性哈希库，这种方式效率比较低下，查找时需要遍历数组，函数里的print_r函数用于测试
  */
+
 
 /* 哈希函数处理接口 便于扩展采用不同的哈希函数实现 目前采用MD5或是crc32实现 */
 interface Hash_handler {
