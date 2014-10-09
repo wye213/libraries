@@ -1,6 +1,6 @@
 /* Author:Tony yin
  * Date:2014-9-22
- * Description:模仿Redis的双端链表的实现
+ * Description:参考了Redis的双端链表的实现，实现了链表迭代器功能
  */
 
 #include <stdlib.h>
@@ -66,6 +66,35 @@ struct listhdr *add_tail_node(struct listhdr *list, void *value) {
 	list->num++;
 
 	return list;
+}
+
+/* 在一个链表中插入一个节点， 根据给定的位置在指定位置中插入节点，位置有正负之分，正向从0开始，反向从-1开始，应该区别开 */
+struct listhdr *insert_index_node(struct listhdr *list, int index, void *value) {
+	struct node *node;
+	struct node *node_index;
+
+	node = (struct node *)malloc(sizeof(struct node));
+	if (node == NULL) return NULL;
+
+	node_index = index_node(list, index);
+
+	if (index < 0) {
+		if (node_index->next == NULL) list->tail = node;
+		node->next = node_index->next;
+		node->prev = node_index;
+		node_index->next->prev = node;
+		node_index->next = node;
+	}
+	else {
+		if (node_index->prev == NULL) list->head = node;
+		node->next = node_index;
+		node->prev = node_index->prev;
+		node_index->prev->next = node;
+		node_index->prev = node;
+	}
+
+	list->num++;
+	return listhdr;
 }
 
 /* 在一个链表中插入一个节点的方式有两种，一种是给定一个index 插入节点， 或是给定一个待插入的节点的前驱结点或是后继结点 */
@@ -134,7 +163,7 @@ void iter_head(struct listhdr *list, struct list_iter *iter) {
 }
 
 /* 聊表迭代器指针重新指向聊表尾 */
-void iter_head(struct listhdr *list, struct list_iter *iter) {
+void iter_tail(struct listhdr *list, struct list_iter *iter) {
     iter->next = list->tail;
     li->direction = LIST_START_TAIL;
 }

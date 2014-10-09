@@ -1,10 +1,10 @@
 /* Author:Tony yin
  * Date:2014-9-22
- * Description:模仿Redis的双端链表的实现
+ * Description:参考了Redis的双端链表的实现，在链表基础上实现一个迭代器比较新颖，其实在面向对象语言java和C++上都有，只是自己没有想到，继续努力。
  */
  
-#ifndef LIST_H
-#define LIST_H
+#ifndef _LIST_H
+#define _LIST_H
 
 #define LIST_START_HEAD 1  // 链表迭代器方向
 #define LIST_START_TAIL 0
