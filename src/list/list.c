@@ -4,13 +4,14 @@
  */
 
 #include <stdlib.h>
+
 #include "list.h"
 
 /* 创建一个链表结构初始状态不包含一个节点 */
 struct listhdr *list_create() {
 	struct listhdr *list;
 
-	list = malloc(sizeof(struct listhdr));
+	list = (struct listhdr *)malloc(sizeof(struct listhdr));
 	if (list == NULL) return NULL;
 
 	list->head = NULL;
@@ -94,7 +95,7 @@ struct listhdr *insert_index_node(struct listhdr *list, int index, void *value) 
 	}
 
 	list->num++;
-	return listhdr;
+	return list;
 }
 
 /* 在一个链表中插入一个节点的方式有两种，一种是给定一个index 插入节点， 或是给定一个待插入的节点的前驱结点或是后继结点 */
@@ -110,8 +111,8 @@ struct listhdr *insert_node(struct listhdr *list, struct node *old_node, void *v
 
 		if (old_node == list->tail)
 			list->tail = node;
-		
-		old_node->next = node;		
+
+		old_node->next = node;
 	}
 	else {
 		node->next = old_node;
@@ -159,13 +160,13 @@ struct node *next_node(struct list_iter *iter) {
 /* 链表迭代器指针重新指向链表头 */
 void iter_head(struct listhdr *list, struct list_iter *iter) {
     iter->next = list->head;
-    li->direction = LIST_START_HEAD;
+    iter->direction = LIST_START_HEAD;
 }
 
 /* 聊表迭代器指针重新指向聊表尾 */
 void iter_tail(struct listhdr *list, struct list_iter *iter) {
     iter->next = list->tail;
-    li->direction = LIST_START_TAIL;
+    iter->direction = LIST_START_TAIL;
 }
 
 /* 释放链表迭代器 */
@@ -202,7 +203,6 @@ struct node *search_by_key(struct listhdr *list, void *key) {
 
 	return node;
 }
-
 
 /* 根据索引返回对应的节点指针， 索引如果从表头则是从0开始，如果是从表尾则是从-1开始 */
 struct node *index_node(struct listhdr *list, int index) {

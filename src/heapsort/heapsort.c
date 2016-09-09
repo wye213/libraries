@@ -5,7 +5,6 @@
 
 
 #include <stdio.h>
-#include <stdlib.h>
 
 #include "heapsort.h"
 
@@ -78,7 +77,6 @@ void heapsort(int array[], int num) {
 		swap(array, i, 0);
 		heap_max_balance(array, 0, heapsize);
 	}
-
 }
 
 /* 测试 */
